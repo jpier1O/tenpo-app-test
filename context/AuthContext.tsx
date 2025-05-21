@@ -31,14 +31,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = (email: string, password: string) => {
-    if (email && password) {
+    if (email === "tenpouser@tenpo.com" && password === "Adm1nT3np0!") {
       const fakeToken = "token-fake-tenpo";
       const expiration = Date.now() + EXPIRATION_TIME_IN_MINUTES * 60 * 1000;
   
       sessionStorage.setItem("token", fakeToken);
       sessionStorage.setItem("token_expiration", expiration.toString());
-
+  
       setToken(fakeToken);
+    } else {
+      throw new Error("Credenciales incorrectas");
     }
   };
 

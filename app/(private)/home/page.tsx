@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/Button/button"
 import { LoadingSpinner } from "@/components/ui/loadingSpinner";
 import { USERS_PER_PAGE } from "@/lib/constants";
 import { getUsers } from "@/lib/api/users";
@@ -19,7 +19,7 @@ type User = {
 const Home = () => {
 	const router = useRouter();
   const searchParams = useSearchParams();
-  const { token, logout } = useAuth();
+  const { token } = useAuth();
 
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,7 +40,7 @@ const Home = () => {
         const data = await getUsers();
         setUsers(data);
       } catch (error) {
-        alert("Error al cargar usuarios.");
+        alert('Error:' + error);
       } finally {
         setLoading(false);
       }

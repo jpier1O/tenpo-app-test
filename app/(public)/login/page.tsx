@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { EyeClosedIcon, EyeIcon, Link } from "lucide-react";
+import { Button } from "@/components/ui/Button/button";
+import { Card } from "@/components/ui/Card/card";
+import { Input } from "@/components/ui/Input/input";
+import { EyeClosedIcon, EyeIcon } from "lucide-react";
 import { LoadingSpinner } from "@/components/ui/loadingSpinner";
 
 const Login = () => {

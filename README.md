@@ -76,4 +76,4 @@ Actualmente, se hace una única carga masiva de 2000 usuarios en cliente y luego
 
 # Despliegue
 
-- Se puede desplegar en vercel, se puede ver el despliegue en el siguiente enlace: 
+- Se puede desplegar en vercel, se puede ver el despliegue en el siguiente enlace: https://tenpo-app-test.vercel.app/

@@ -31,11 +31,18 @@ const Login = () => {
 
   const handleLogin = () => {
     setError("");
+  
     if (!email || !password) {
       setError("Por favor ingresa email y contraseña.");
       return;
     }
-    login(email, password);
+  
+    try {
+      login(email, password);
+    } catch (err) {
+      setError("Correo o contraseña incorrectos.");
+      console.log(err);
+    }
   };
 
   if (!hasMounted || loading) return <LoadingSpinner message="Verificando sesión..." />;

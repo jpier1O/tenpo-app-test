@@ -2,15 +2,13 @@
 
 Esta es una aplicación construida en Next.js con TypeScript que simula un proceso de login y permite navegar por una sección privada donde se muestra una lista paginada de usuarios.
 
+# Version of Node 22.15.0 (!Important)
+
 # Tecnologías usadas y librerias
 
 - Next.js
 - TailwindCSS
 - Axios
-- React Query
-- React Hook Form
-- React Toastify
-- React Icons
 - React Router
 - React Context
 - ESLint
@@ -18,7 +16,6 @@ Esta es una aplicación construida en Next.js con TypeScript que simula un proce
 - Husky
 - Jest
 - React Testing Library
-- React Query Devtools
 
 ---
 

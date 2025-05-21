@@ -1,54 +1,3 @@
-// "use client";
-
-// import Link from "next/link";
-// import { usePathname, useRouter } from "next/navigation";
-// import { useAuth } from "@/context/AuthContext";
-// import { Button } from "@/components/ui/button";
-// import { cn } from "@/lib/utils";
-
-// export const Navbar = () => {
-//   const pathname = usePathname();
-//   const router = useRouter();
-//   const { logout } = useAuth();
-
-//   const navItems = [
-//     { name: "Home", href: "/home" },
-//     { name: "Perfil", href: "/profile" },
-//     { name: "Configuración", href: "/settings" },
-//   ];
-
-//   const handleLogout = () => {
-//     logout();
-//     router.replace("/login");
-//   };
-
-//   return (
-//     <header className="bg-white shadow fixed w-full z-10 top-0 left-0">
-//       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-//         <div className="flex items-center gap-6">
-//           <h1 className="text-xl font-bold text-purple">Tenpo App</h1>
-//           <nav className="flex gap-4">
-//             {navItems.map((item) => (
-//               <Link
-//                 key={item.href}
-//                 href={item.href}
-//                 className={cn(
-//                   "text-sm font-medium hover:text-purple",
-//                   pathname === item.href ? "text-purple font-semibold" : "text-gray-700"
-//                 )}
-//               >
-//                 {item.name}
-//               </Link>
-//             ))}
-//           </nav>
-//         </div>
-//         <Button variant="outline" onClick={handleLogout}>
-//           Logout
-//         </Button>
-//       </div>
-//     </header>
-//   );
-// };
 "use client";
 
 import Link from "next/link";
@@ -66,9 +15,9 @@ export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", href: "/home" },
-    { name: "Perfil", href: "/profile" },
-    { name: "Configuración", href: "/settings" },
+    { name: "Home", href: "/home", enabled: true },
+    { name: "Perfil", href: "/profile", enabled: true },
+    { name: "Configuración", href: "/settings", enabled: false },
   ];
 
   const handleLogout = () => {
@@ -83,18 +32,24 @@ export const Navbar = () => {
           <h1 className="text-xl font-bold text-purple">Tenpo App</h1>
 
           <nav className="hidden md:flex gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium hover:text-purple",
-                  pathname === item.href ? "text-purple font-semibold" : "text-gray-700"
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.enabled ? item.href : "#"}
+              onClick={(e) => !item.enabled && e.preventDefault()}
+              className={cn(
+                "text-sm font-medium",
+                item.enabled
+                  ? pathname === item.href
+                    ? "text-purple font-semibold"
+                    : "text-gray-700 hover:text-purple"
+                  : "text-gray-400 cursor-not-allowed"
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+
           </nav>
         </div>
 
@@ -104,7 +59,7 @@ export const Navbar = () => {
             className="hidden md:inline-flex"
             onClick={handleLogout}
           >
-            Logout
+            Cerrar Sesión
           </Button>
           <button
             className="md:hidden text-purple"
@@ -132,7 +87,7 @@ export const Navbar = () => {
             </Link>
           ))}
           <Button variant="outline" onClick={handleLogout}>
-            Logout
+            Cerrar Sesión
           </Button>
         </nav>
       )}

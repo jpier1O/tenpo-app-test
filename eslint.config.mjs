@@ -9,6 +9,15 @@ const eslintConfig = [
   ...compat.config({
     extends: ['next/core-web-vitals', 'next/typescript'],
   }),
+  {
+    ignores: [
+      '**/.next/**',
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/__tests__/**',
+      '**/__mocks__/**',
+    ],
+  }
 ]
  
 export default eslintConfig

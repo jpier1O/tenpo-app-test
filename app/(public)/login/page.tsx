@@ -41,6 +41,7 @@ const Login = () => {
       login(email, password);
     } catch (err) {
       setError("Correo o contraseña incorrectos.");
+      console.log(err);
     }
   };
 

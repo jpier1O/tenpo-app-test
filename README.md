@@ -74,3 +74,26 @@ Actualmente, se hace una única carga masiva de 2000 usuarios en cliente y luego
 # Despliegue
 
 - Se puede desplegar en vercel, se puede ver el despliegue en el siguiente enlace: https://tenpo-app-test.vercel.app/
+
+
+# Interaccion
+
+- Login con credenciales: 
+
+```
+user: tenpouser@tenpo.com
+password: Adm1nT3np0!
+```
+
+## Configuración de Axios
+
+Se utiliza un interceptor global para añadir automáticamente el token en las peticiones:
+
+```ts
+api.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});

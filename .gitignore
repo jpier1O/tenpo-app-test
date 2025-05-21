@@ -52,3 +52,4 @@ yarn-error.log*
 
 *.log
 jest-test-results.json
+.vercel

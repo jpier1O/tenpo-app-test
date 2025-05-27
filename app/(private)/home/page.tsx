@@ -5,8 +5,9 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/Button/button"
 import { LoadingSpinner } from "@/components/ui/loadingSpinner";
-import { USERS_PER_PAGE } from "@/lib/constants";
+import { MAX_ITEMS_PER_PAGE, USERS_PER_PAGE } from "@/lib/constants";
 import { getUsers } from "@/lib/api/users";
+import Image from "next/image";
 
 type User = {
   login: { uuid: string };
@@ -25,8 +26,9 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   const page = parseInt(searchParams.get("page") || "1", 10);
-  const start = (page - 1) * USERS_PER_PAGE;
-  const end = start + USERS_PER_PAGE;
+  // const start = (page - 1) * USERS_PER_PAGE;
+  // const end = start + USERS_PER_PAGE;
+
 
   useEffect(() => {
     if (!token) {
@@ -34,22 +36,23 @@ const Home = () => {
       return;
     }
 
-    const fetchUsers = async () => {
-      setLoading(true);
-      try {
-        const data = await getUsers();
-        setUsers(data);
-      } catch (error) {
-        alert('Error:' + error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    
+  const fetchUsers = async () => {
+    setLoading(true);
+    try {
+      const data = await getUsers(page); // 👈 solo trae 100 usuarios de la página actual
+      setUsers(data);
+    } catch (error) {
+      alert("Error: " + error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
     fetchUsers();
-  }, [token]);
+  }, [token, router, page]);
 
-  const totalPages = Math.ceil(users.length / USERS_PER_PAGE);
+  const totalPages = Math.ceil(MAX_ITEMS_PER_PAGE / USERS_PER_PAGE);
 
   const goToPage = (newPage: number) => {
     router.push(`/home?page=${newPage}`);
@@ -59,7 +62,7 @@ const Home = () => {
     return <LoadingSpinner message="Cargando usuarios..." />;
   }
 
-  const paginatedUsers = users.slice(start, end);
+  // const paginatedUsers = users.slice(start, end);
 
   return (
     <div className="min-h-screen bg-lavender p-4 sm:p-6">
@@ -68,12 +71,14 @@ const Home = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
-        {paginatedUsers.map((user) => (
+        {users.map((user) => (
           <div key={user.login.uuid} className="bg-white p-4 rounded shadow flex flex-col items-center">
-            <img
-              src={user.picture.large}
+            <Image
+              src={user?.picture?.large || ""}
               alt={`${user.name.first} ${user.name.last}`}
-              className="w-24 h-24 rounded-full object-cover mb-3"
+              width={96}
+              height={96} 
+              className="rounded-full object-cover mb-3"
             />
             <h2 className="font-semibold text-purple text-lg text-center">
               {user.name.first} {user.name.last}

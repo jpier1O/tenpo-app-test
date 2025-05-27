@@ -27,7 +27,7 @@ const Login = () => {
     if (hasMounted && !loading && token) {
       router.replace("/home");
     }
-  }, [hasMounted, loading, token]);
+  }, [hasMounted, loading, token, router]);
 
   const handleLogin = () => {
     setError("");

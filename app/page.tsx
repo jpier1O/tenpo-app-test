@@ -12,7 +12,7 @@ export default function Home() {
     if (!loading) {
       router.replace(token ? "/home" : "/login");
     }
-  }, [token, loading]);
+  }, [token, loading, router]);
 
   return null; 
 }

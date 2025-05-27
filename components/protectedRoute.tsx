@@ -13,7 +13,7 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     if (!loading && !token) {
       router.replace("/login");
     }
-  }, [loading, token]);
+  }, [loading, token, router]);
 
   if (loading || !token) {
     return <LoadingSpinner message="Verificando sesión..." />;
